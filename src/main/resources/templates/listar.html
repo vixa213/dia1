@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<title th:text="${titulo}">Insert title here</title>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+		<div class="card bg-ligth">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div calas="card-body">
+
+				<h1 class="text-primary	" th:text="${titulo}"></h1>
+				<h4>
+					<a th:href="@{/form}" class="btn btn-success btn-xs">Crear
+						cliente</a>
+				</h4>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>nombre</th>
+							<th>apellido</th>
+							<th>email</th>
+							<th>fecha</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente: ${clientes}">
+							<td th:text="${cliente.id}"></td>
+							<td th:text="${cliente.nombre}"></td>
+							<td th:text="${cliente.apellido}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.createAt}"></td>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/eliminar/} + ${cliente.id}" th:text="'Eliminar'"
+								onclick="return confirm('Seguro de eliminar este cliente?');"></a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
