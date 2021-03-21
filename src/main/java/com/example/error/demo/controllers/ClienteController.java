@@ -123,7 +123,7 @@ public class ClienteController {
 		if (!foto.isEmpty()) {
 
 			String uniqueFileName = UUID.randomUUID().toString() + "_" + foto.getOriginalFilename();
-			Path roothPath = Paths.get("uploads").resolve(foto.getOriginalFilename());
+			Path roothPath = Paths.get("uploads").resolve(uniqueFileName);
 			
 			Path roothAbsolutPath = roothPath.toAbsolutePath();
 			
@@ -132,11 +132,11 @@ public class ClienteController {
 			
 			try {
 				Files.copy(foto.getInputStream(), roothAbsolutPath);
-				cliente.setFoto(foto.getOriginalFilename());
+				cliente.setFoto(uniqueFileName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Path rootPath = Paths.get("uploads").resolve(uniqueFileName);
+		//	Path rootPath = Paths.get("uploads").resolve(uniqueFileName);
 		}
 
 		clienteService.save(cliente);
